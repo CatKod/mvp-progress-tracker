@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MVP Progress Tracker
 
-## Getting Started
+Ứng dụng theo dõi MVP theo **工数管理表 (bảng quản lý công số)** và **進捗管理表 (bảng quản lý tiến độ)** —
+mô hình quản lý dự án được sinh viên Nhật sử dụng, chuyển sang tiếng Việt.
 
-First, run the development server:
+## Tính năng
+
+| Màn hình | Nội dung |
+|---|---|
+| Trang chủ — Dashboard tuần | Tổng quan task, deadline sắp tới, top 3 nhiệm vụ ưu tiên, ngân sách thời gian |
+| Task Board | Ma trận Eisenhower 4 góc, chuyển góc nhanh |
+| Lịch tuần | Bảng 7 ngày × khung giờ, time-blocking task, lịch Google Calendar (mô phỏng) |
+| Đánh giá & Ưu tiên | Chấm điểm ưu tiên theo deadline / độ khó / mức ảnh hưởng |
+| Nhóm học tập | Thành viên, 工数上限 (giờ rản), bảng khối lượng |
+| Chi tiết Task | Đổi trạng thái, góc Eisenhower, vấn đề & ghi chú |
+| Thêm / Sửa Task | Đặt hạn nộp riêng, tự suy ra góc Eisenhower |
+| Cảnh báo trùng deadline | Phát hiện task trùng ngày nộp hoặc sát giờ |
+| Trung tâm Thông báo | Nhắc việc theo Personal Deadline |
+| Ngân sách thời gian | Giờ tối đa / ngày, / tuần |
+| Bảng khối lượng nhóm | 稼働率 (công suất) từng thành viên |
+| Khung giờ im lặng | Quiet Hours |
+| Chế độ Cao điểm | Ẩn / đẩy lùi task Câu lạc bộ & Sở thích |
+| Gia hạn deadline | Template email xin gia hạn (Việt / Anh / Nhật) |
+| Cài đặt | Hồ sơ sinh viên, xuất / nhập JSON |
+
+## Công nghệ
+
+- Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · shadcn/ui (Base UI)
+- Lưu trữ cục bộ bằng `localStorage` — không cần server, không cần đăng nhập
+- Toàn bộ logic nghiệp vụ nằm ở `src/lib/` (types · domain · use-tracker)
+
+## Chạy local
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Mở http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Cấu trúc
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├─ app/                    # 18 route theo sơ đồ chuyển màn hình
+├─ components/
+│  ├─ ui/                  # shadcn/ui
+│  ├─ app-shell.tsx        # Sidebar + header điều hướng
+│  ├─ tracker-provider.tsx # React context cho state
+│  ├─ page-header.tsx · stat-card.tsx · task-card.tsx · status-badge.tsx
+├─ lib/
+│  ├─ types.ts             # Domain model
+│  ├─ domain.ts            # Hàm nghiệp vụ thuần (ưu tiên, xung đột, workload…)
+│  ├─ use-tracker.ts       # Store hook + localStorage
+│  ├─ sample-data.ts       # Dữ liệu mẫu
+│  └─ CONTRACT.md          # Hợp đồng API cho giao diện
+```
 
-## Learn More
+## Nguồn
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Bám theo sơ đồ chuyển màn hình `screen-flow.drawio` và sheet
+「ソリューションインタビュー項目 / MVP(Phase2)開発進捗管理シート」.
