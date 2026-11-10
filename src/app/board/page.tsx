@@ -44,7 +44,7 @@ export default function BoardPage() {
                   </p>
                 )}
                 {items.map((t: Task) => (
-                  <TaskCard key={t.id} task={t} href={`/tasks/${t.id}`} />
+                  <TaskCard key={t.id} task={t} href={`/tasks/detail`} />
                 ))}
               </div>
               <Link

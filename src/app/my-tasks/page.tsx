@@ -72,7 +72,7 @@ export default function MyTasksPage() {
               <p className="text-sm text-slate-500">Chưa có task nào được giao.</p>
             )}
             {mine.map((t) => (
-              <TaskCard key={t.id} task={t} href={`/tasks/${t.id}`} showQuadrant />
+              <TaskCard key={t.id} task={t} href={`/tasks/detail`} showQuadrant />
             ))}
           </div>
         </TabsContent>

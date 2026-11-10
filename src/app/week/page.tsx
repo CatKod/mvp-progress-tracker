@@ -123,7 +123,7 @@ export default function WeekPage() {
                         {blocks.map(({ t, b }) => (
                           <Link
                             key={b.id}
-                            href={`/tasks/${t.id}`}
+                            href={`/tasks/detail`}
                             className="truncate rounded bg-emerald-100 px-1.5 py-0.5 text-[10px] text-emerald-800 hover:bg-emerald-200"
                           >
                             {t.title}

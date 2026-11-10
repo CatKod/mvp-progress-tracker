@@ -150,7 +150,7 @@ export default function GroupPage() {
                       {w.tasks.slice(0, 3).map((t) => (
                         <Link
                           key={t.id}
-                          href={`/tasks/${t.id}`}
+                          href={`/tasks/detail`}
                           className="max-w-32 truncate rounded bg-slate-100 px-1.5 py-0.5 text-[11px] text-slate-600 hover:bg-slate-200"
                         >
                           {t.title}

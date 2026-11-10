@@ -51,6 +51,7 @@ export const SUB_SCREENS: {
   icon: React.ComponentType<{ className?: string }>;
   implemented: boolean;
 }[] = [
+  { href: "/tasks/detail", label: "Chi tiết Task", screenNo: 13, icon: ListChecks, implemented: true },
   { href: "/tasks/new", label: "Thêm / Sửa Task", screenNo: 18, icon: ListChecks, implemented: true },
   { href: "/alerts", label: "Cảnh báo trùng deadline", screenNo: 19, icon: CircleAlert, implemented: true },
   { href: "/notifications", label: "Trung tâm Thông báo", screenNo: 20, icon: Bell, implemented: true },

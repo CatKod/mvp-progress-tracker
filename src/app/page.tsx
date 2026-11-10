@@ -161,7 +161,7 @@ export default function HomePage() {
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
                     <Link
-                      href={`/tasks/${p.task.id}`}
+                      href={`/tasks/detail`}
                       className="truncate text-sm font-medium text-slate-800 hover:text-emerald-700"
                     >
                       {p.task.title}
@@ -192,7 +192,7 @@ export default function HomePage() {
             {dueSoon.map(({ t, d }) => (
               <div key={t.id} className="flex items-center justify-between gap-2">
                 <Link
-                  href={`/tasks/${t.id}`}
+                  href={`/tasks/detail`}
                   className="min-w-0 flex-1 truncate text-sm text-slate-700 hover:text-emerald-700"
                 >
                   {t.title}
@@ -260,7 +260,7 @@ export default function HomePage() {
         </div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {visibleTasks.slice(0, 6).map((t) => (
-            <TaskCard key={t.id} task={t} href={`/tasks/${t.id}`} showQuadrant />
+            <TaskCard key={t.id} task={t} href={`/tasks/detail`} showQuadrant />
           ))}
         </div>
       </div>

@@ -47,7 +47,7 @@ export default function PriorityPage() {
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
                     <Link
-                      href={`/tasks/${p.task.id}`}
+                      href={`/tasks/detail`}
                       className="truncate text-sm font-medium text-slate-800 hover:text-emerald-700"
                     >
                       {p.task.title}

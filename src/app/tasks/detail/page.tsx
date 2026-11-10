@@ -1,8 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import { ArrowLeft, Clock3, TriangleAlert, User } from "lucide-react";
+import { ArrowLeft, Clock3, TriangleAlert } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 import { StatusBadge } from "@/components/status-badge";
 import { useTrackerApi } from "@/components/tracker-provider";
@@ -16,7 +16,6 @@ import { DIFFICULTIES, IMPACTS, PROGRESS_STATUSES, QUADRANT_BY_VALUE } from "@/l
 import { daysUntil, effectiveDeadline, formatDateVi, isOverdue } from "@/lib/domain";
 
 export default function TaskDetailPage() {
-  const params = useParams<{ id: string }>();
   const {
     hydrated,
     tasks,
@@ -24,17 +23,18 @@ export default function TaskDetailPage() {
     setTaskQuadrant,
     upsertTask,
     removeTask,
-    members,
   } = useTrackerApi();
+  const [selectedId, setSelectedId] = useState<string>("");
 
   if (!hydrated) return <Skeleton className="h-96 w-full" />;
 
-  const task = tasks.find((t) => t.id === params.id);
+  const task = tasks.find((t) => t.id === selectedId) ?? tasks[0];
+
   if (!task) {
     return (
       <Card>
         <CardContent className="py-12 text-center">
-          <p className="text-sm text-slate-500">Không tìm thấy task.</p>
+          <p className="text-sm text-slate-500">Chưa có task nào.</p>
           <Link href="/" className="mt-2 inline-block text-sm text-emerald-700 hover:underline">
             Về Trang chủ
           </Link>
@@ -72,6 +72,24 @@ export default function TaskDetailPage() {
           </>
         }
       />
+
+      {/* Chọn task */}
+      <div className="flex flex-wrap gap-2">
+        {tasks.map((t) => (
+          <button
+            key={t.id}
+            type="button"
+            onClick={() => setSelectedId(t.id)}
+            className={`max-w-56 truncate rounded-lg border px-2.5 py-1.5 text-xs transition-colors ${
+              t.id === task.id
+                ? "border-emerald-500 bg-emerald-50 font-medium text-emerald-800"
+                : "border-slate-200 bg-white text-slate-600 hover:bg-slate-50"
+            }`}
+          >
+            {t.title}
+          </button>
+        ))}
+      </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
@@ -115,6 +133,7 @@ export default function TaskDetailPage() {
             </CardHeader>
             <CardContent className="space-y-3">
               <Textarea
+                key={`issues-${task.id}`}
                 defaultValue={task.issues}
                 placeholder="Vấn đề / Nguyên nhân / Đối tác…"
                 rows={3}
@@ -122,6 +141,7 @@ export default function TaskDetailPage() {
               />
               <p className="text-xs font-medium uppercase tracking-wide text-slate-400">メモ</p>
               <Textarea
+                key={`memo-${task.id}`}
                 defaultValue={task.memo}
                 placeholder="Ghi chú…"
                 rows={2}

@@ -68,7 +68,7 @@ export default function AlertsPage() {
                       return (
                         <Link
                           key={id}
-                          href={`/tasks/${id}`}
+                          href={`/tasks/detail`}
                           className="rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs text-slate-700 hover:border-emerald-300 hover:bg-emerald-50"
                         >
                           {t.title} ・ {t.estimateHours}h

@@ -76,7 +76,7 @@ export default function NotificationsPage() {
                 )}
                 {n.taskId && (
                   <Link
-                    href={`/tasks/${n.taskId}`}
+                    href={`/tasks/detail`}
                     className="inline-flex h-6 items-center rounded-lg px-2 text-xs text-emerald-700 hover:bg-emerald-50"
                   >
                     Xem task
